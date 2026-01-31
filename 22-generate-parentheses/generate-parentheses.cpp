@@ -3,23 +3,24 @@ public:
     vector<string> generateParenthesis(int n) {
         vector<string> res;
         string cur;
-        dfs(n, n, cur, res);
+        cur.reserve(2 * n);
+        dfs(n, 0, 0, cur, res);
         return res;
     }
-private:
-    void dfs(int open, int close, string& cur, vector<string>& res) {
-        if (!open && !close) {
+
+    void dfs(int n, int open, int close, string &cur, vector<string> &res) {
+        if (cur.size() == 2 * n) {
             res.push_back(cur);
             return;
         }
-        if (open) {
+        if (open < n) {
             cur.push_back('(');
-            dfs(open - 1, close, cur, res);
+            dfs(n, open + 1, close, cur, res);
             cur.pop_back();
         }
-        if (close > open) {
+        if (close < open) {
             cur.push_back(')');
-            dfs(open, close - 1, cur, res);
+            dfs(n, open, close + 1, cur, res);
             cur.pop_back();
         }
     }
