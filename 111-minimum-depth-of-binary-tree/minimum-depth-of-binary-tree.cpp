@@ -2,9 +2,15 @@ class Solution {
 public:
     int minDepth(TreeNode* root) {
         if (!root) return 0;
-        int l = minDepth(root->left);
-        int r = minDepth(root->right);
-        if (!l || !r) return l + r + 1;
-        return 1 + min(l, r);
+        queue<pair<TreeNode*, int>> q;
+        q.push({root, 1});
+        while (!q.empty()) {
+            auto [node, d] = q.front();
+            q.pop();
+            if (!node->left && !node->right) return d;
+            if (node->left)  q.push({node->left,  d + 1});
+            if (node->right) q.push({node->right, d + 1});
+        }
+        return 0;
     }
 };
