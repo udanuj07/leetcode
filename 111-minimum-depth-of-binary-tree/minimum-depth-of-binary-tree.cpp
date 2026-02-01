@@ -2,9 +2,9 @@ class Solution {
 public:
     int minDepth(TreeNode* root) {
         if (!root) return 0;
-        if (!root->left && !root->right) return 1;
-        if (!root->left) return 1 + minDepth(root->right);
-        if (!root->right) return 1 + minDepth(root->left);
-        return 1 + min(minDepth(root->left), minDepth(root->right));
+        int l = minDepth(root->left);
+        int r = minDepth(root->right);
+        if (!l || !r) return l + r + 1;
+        return 1 + min(l, r);
     }
 };
