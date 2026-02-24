@@ -6,11 +6,11 @@ public:
         int i = 0, j = 0, n = g.size(), m = s.size(), ans = 0;
         while (i < n && j < m) {
             if (s[j] >= g[i]) {
-                ans++;
-                i++;
-                j++;
+                ++ans;
+                ++i;
+                ++j;
             } else {
-                j++;
+                ++j;
             }
         }
         return ans;
