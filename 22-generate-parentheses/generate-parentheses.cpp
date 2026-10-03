@@ -1,27 +1,21 @@
+void fun(string tmp,vector<string>&v1,int n,int a,int b){
+
+    if(a>n || b>n || b>a) return ;
+    if(tmp.size()==2*n){
+        v1.push_back(tmp);
+        return ;
+    }
+
+    fun(tmp+"(",v1,n,a+1,b);
+    fun(tmp+")",v1,n,a,b+1);
+}
+
+
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
-        vector<string> res;
-        string cur;
-        cur.reserve(2 * n);
-        dfs(n, 0, 0, cur, res);
-        return res;
-    }
-
-    void dfs(int n, int open, int close, string &cur, vector<string> &res) {
-        if (cur.size() == 2 * n) {
-            res.push_back(cur);
-            return;
-        }
-        if (open < n) {
-            cur.push_back('(');
-            dfs(n, open + 1, close, cur, res);
-            cur.pop_back();
-        }
-        if (close < open) {
-            cur.push_back(')');
-            dfs(n, open, close + 1, cur, res);
-            cur.pop_back();
-        }
+        vector<string>v1;
+        fun("",v1,n,0,0);
+        return v1;
     }
 };
